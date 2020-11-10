@@ -27,7 +27,7 @@ The project is composed by 4 level. In this branch, it is developed the first le
   ```
 
   ## Composition
-  All the project modules are in *lib* folder:
+  All the project modules are in *library* folder:
   * *lotto.py* contains all the main functions and classes;
   * *display_table_lib.py* is a custom module used for generate a visual representation of ticket;
  
