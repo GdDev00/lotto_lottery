@@ -32,5 +32,5 @@ The project is composed by 4 level. In this branch, it is developed the first le
   * *display_table_lib.py* is a custom module used for generate a visual representation of ticket;
  
   ## How to launch
-  From the root folder launch *game.py* in the command line 
+  From the root folder launch *game.py* in the command line and follow the instructions.
   
