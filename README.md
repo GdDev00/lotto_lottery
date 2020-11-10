@@ -8,11 +8,11 @@ The project is composed by 4 level. In this branch, it is developed the first le
 * ## Level 1: Lotto Ticket Generator
 Level one of this project requires to develop a lotto ticket generator\
 The software can be launched through command line typing *game.py* \
-It asks how many tickets to generate (1 to max 5), the city (aka Routa), the type of bill and the amount of numbers to generate\
+It asks how many tickets to generate (1 to max 5), the city (aka Routa), the type of bill and the amount of numbers to generate.\
 It generates random ticket and, as output, it prints a visual representation of a lotto ticket.
 
-**Example**\
-Generate one ticket with five numbers in the city of Roma and with Ambo as type of game.
+**Example of a visual representation**\
+(one ticket with five numbers in the city of Roma and with Ambo as type of game)
 ```
 +---------------------------------+
 +         Italian Lottery         +
