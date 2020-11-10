@@ -1,5 +1,5 @@
-from lib.lotto import *
-from lib.display_table_lib import *
+from library.lotto import *
+from library.display_table_lib import *
 
 MAX_BILLS = 5
 
@@ -76,7 +76,7 @@ def generate_ticket():
         print()
         print()
         
-        generate_ticket()
+    generate_ticket()
 
 
 
