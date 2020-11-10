@@ -57,7 +57,7 @@ def generate_ticket():
         print()
 
         #--------------#
-        #AMOUNT OF NUMBERS
+        #SELECT AMOUNT OF NUMBERS
         min_amount = Type(selected_type_bill).value
         print("You have chosen %s, so have to play at least %d number and a max of 10 numbers"\
             %(Type(selected_type_bill).name,min_amount))
@@ -69,7 +69,10 @@ def generate_ticket():
             number_amount = input("- ")
         number_amount = int(number_amount)
 
+        #GENERATE TICKET
         ticket = Ticket(number_amount,selected_type_bill,selected_route)
+
+        #PRINT TICKET
         ticket.print()
 
         print()
