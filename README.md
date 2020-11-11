@@ -17,7 +17,7 @@ The project is composed by 4 level. In this branch, it is developed the first le
   +         Italian Lottery         +
   +---------------------------------+
   +              Ticket             +
-  + Routa: ROMA                     +
+  + City: ROMA                      +
   + Type: AMBO                      +
   +           --- --- ---           +
   +         28 70 30 25 66          +

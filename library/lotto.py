@@ -17,7 +17,7 @@ class Ruote(Enum):
     VENEZIA = 10
     TUTTE = 11
 
-#enum with all the type of bill
+#enum with all the type of bill and its min number
 class Type(Enum):
     AMBATA = 1
     AMBO = 2
@@ -28,7 +28,13 @@ class Type(Enum):
 class Ticket():
     
     #INIT!
-    def __init__(self, amount_number, bill_type, route):
+    #@param amount_number -> The amount of number to generate.It must be coerent with the bill type
+    #                        For example, if you choose "CINQUINA", you can't choose less than 5 numbers
+    #                        Please, see the "Type Enum" for more info about this
+    #
+    #@param bill_type     -> The chosen type of bill, please see the "Type Enum" 
+    #@route               -> The chosen city (Ruota), see the "Ruote" enum
+    def __init__(self, amount_number, bill_type, city):
 
         #check the validity of the type
         if(bill_type > 0 and bill_type <= len(Type)):
@@ -46,9 +52,9 @@ class Ticket():
             raise ValueError("the amount of number must be an integer and it cannot be greater than 10!")
 
 
-        #check the validity of the route
-        if (route > 0 and route <= len(Ruote)):
-            self._route = route
+        #check the validity of the city (ruota)
+        if (city > 0 and city <= len(Ruote)):
+            self._city = city
         else:
             raise ValueError("The entered number is not included in the allowed route range!")
 
@@ -73,7 +79,7 @@ class Ticket():
     def print(self):
         print_ticket_header_line()
         print_line("Ticket",1)
-        print_line("Routa: %s" %(Ruote(self._route).name))
+        print_line("City: %s" %(Ruote(self._city).name))
         print_line("Type: %s" %(Type(self._bill_type).name))
         number = ""
         for num in self._numbers:
