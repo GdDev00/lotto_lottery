@@ -3,26 +3,14 @@ from library.display_table_lib import *
 
 MAX_BILLS = 5
 
-def generate_ticket():
-    print_ticket_header_line()   
-    print_table_row("Ticket generator") 
-    print()
+#Generate x random ticket
+#@params tickets_number -> the number of ticket that you want generate
+#@return                -> a list with all the ticket
+def generate_tickets(tickets_number):
 
-    print("How many tickets do you want generate?")
-    print("Please, write a number between 1-%d; 0 to exit:"%MAX_BILLS) 
-    n_of_tickets = input("- ")
-    while n_of_tickets.isdigit()==False or int(n_of_tickets)>MAX_BILLS:
-        print("The value must be a valid integer number!")
-        n_of_tickets = input("- ")
-    
-    n_of_tickets = int(n_of_tickets)
+    tickets_list = []
 
-    #exit
-    if n_of_tickets == 0:
-        print("Quitting...")
-        quit(0)
-
-    for i in range(n_of_tickets):
+    for i in range(tickets_number):
         print_table_row("Ticket %d" %(i+1))
 
         #------------------#
@@ -72,20 +60,41 @@ def generate_ticket():
         #GENERATE TICKET
         ticket = Ticket(number_amount,selected_type_bill,selected_route)
 
-        #PRINT TICKET
-        ticket.print()
+        tickets_list.append(ticket)
 
-        print()
         print()
         print()
         
-    generate_ticket()
-
-
-
+    return tickets_list
 
 
 def main():
-    generate_ticket()
+    print_ticket_header_line()   
+    print_table_row("Ticket generator") 
+    print()
+
+    print("How many tickets do you want generate?")
+    print("Please, write a number between 1-%d; 0 to exit:"%MAX_BILLS) 
+    n_of_tickets = input("- ")
+    while n_of_tickets.isdigit()==False or int(n_of_tickets)>MAX_BILLS:
+        print("The value must be a valid integer number!")
+        n_of_tickets = input("- ")
+    
+    n_of_tickets = int(n_of_tickets)
+
+    #exit
+    if n_of_tickets == 0:
+        print("Quitting...")
+        quit(0)
+
+    #generate ticket
+    tickets = generate_tickets(n_of_tickets)
+
+    #print ticket
+    for ticket in tickets:
+        ticket.print()
+        print()
+        print()
+    main()
 
 main()
