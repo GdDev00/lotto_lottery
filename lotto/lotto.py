@@ -1,7 +1,7 @@
 #LEARNING PATH 1
 from enum import Enum
-from display_table_lib import *
-import random
+from print_utils import PrintUtils
+from random import randrange
 
 #enum with all the Route (city) of the bill
 class Ruote(Enum):
@@ -67,7 +67,7 @@ class Ticket():
 
         for _ in range(self._amount_number):
             #generate a random number between 1-90
-            number = random.randrange(1,90)
+            number = randrange(1,90)
             
             #check if the number is already in the extracted numbers
             if number not in number_list:
@@ -77,36 +77,14 @@ class Ticket():
 
     #print the ticket 
     def print(self):
-        print_ticket_header_line()
-        print_line("Ticket",1)
-        print_line("City: %s" %(Ruote(self._city).name))
-        print_line("Type: %s" %(Type(self._bill_type).name))
+        PrintUtils.print_ticket_header_line()
+        PrintUtils.print_line("Ticket",1)
+        PrintUtils.print_line("City: %s" %(Ruote(self._city).name))
+        PrintUtils.print_line("Type: %s" %(Type(self._bill_type).name))
         number = ""
         for num in self._numbers:
             number += str(num) +" "
-        print_line("--- --- ---",1)
-        print_line(number,1)
-        print_ticket_footer_line()
-
-class Extraction():
-    #init
-    def __init__(self):
-        self._extraction_dict = dict()
-
-    def extract(self):
-        temp_extracted_number = []
-
-        for ruota_ind in range(1,len(Ruote)):
-            ruota_numbers_list = []
-
-            for _ in range(5):
-                #generate a never extracted number
-                temp_num = random.randrange(1,90)
-                while temp_num in temp_extracted_number:
-                    temp_num = random.randrange(1,90)
-                ruota_numbers_list.append(temp_num)
-
-                temp_extracted_number.append(temp_num)
-
-            self._extraction_dict[ruota_ind] = ruota_numbers_list
+        PrintUtils.print_line("--- --- ---",1)
+        PrintUtils.print_line(number,1)
+        PrintUtils.print_ticket_footer_line()
 

@@ -1,5 +1,5 @@
 from lotto.lotto import *
-from lotto.display_table_lib import *
+from lotto.print_utils import PrintUtils
 
 MAX_BILLS = 5
 
@@ -11,7 +11,7 @@ def generate_tickets(tickets_number):
     tickets_list = []
 
     for i in range(tickets_number):
-        print_table_row("Ticket %d" %(i+1))
+        PrintUtils.print_table_row("Ticket %d" %(i+1))
 
         #------------------#
         #SELECT TYPE OF BILL
@@ -25,7 +25,7 @@ def generate_tickets(tickets_number):
             print("The value must be a valid integer number!")
             selected_type_bill = input("- ")
         selected_type_bill = int(selected_type_bill)
-        print_table_row(Type(selected_type_bill).name)
+        PrintUtils.print_table_row(Type(selected_type_bill).name)
         print()
 
         #------------#
@@ -41,7 +41,7 @@ def generate_tickets(tickets_number):
             selected_route = input("- ")
         
         selected_route = int(selected_route)
-        print_table_row(Ruote(selected_route).name)
+        PrintUtils.print_table_row(Ruote(selected_route).name)
         print()
 
         #--------------#
@@ -68,11 +68,8 @@ def generate_tickets(tickets_number):
     return tickets_list
 
 def main():
-    extractions = Extraction()
-    print(extractions.extract())
-
-    print_ticket_header_line()   
-    print_table_row("Ticket generator") 
+    PrintUtils.print_ticket_header_line()   
+    PrintUtils.print_table_row("Ticket generator") 
     print()
 
     print("How many tickets do you want generate?")
