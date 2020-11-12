@@ -2,7 +2,7 @@
 from enum import Enum
 from print_utils import PrintUtils
 from random import randrange
-
+#aa
 #enum with all the Route (city) of the bill
 class Ruote(Enum):
     BARI = 1
