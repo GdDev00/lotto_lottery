@@ -1,5 +1,5 @@
-from library.lotto import *
-from library.display_table_lib import *
+from lotto.lotto import *
+from lotto.display_table_lib import *
 
 MAX_BILLS = 5
 
@@ -67,8 +67,10 @@ def generate_tickets(tickets_number):
         
     return tickets_list
 
-
 def main():
+    extractions = Extraction()
+    print(extractions.extract())
+
     print_ticket_header_line()   
     print_table_row("Ticket generator") 
     print()

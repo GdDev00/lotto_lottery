@@ -87,3 +87,26 @@ class Ticket():
         print_line("--- --- ---",1)
         print_line(number,1)
         print_ticket_footer_line()
+
+class Extraction():
+    #init
+    def __init__(self):
+        self._extraction_dict = dict()
+
+    def extract(self):
+        temp_extracted_number = []
+
+        for ruota_ind in range(1,len(Ruote)):
+            ruota_numbers_list = []
+
+            for _ in range(5):
+                #generate a never extracted number
+                temp_num = random.randrange(1,90)
+                while temp_num in temp_extracted_number:
+                    temp_num = random.randrange(1,90)
+                ruota_numbers_list.append(temp_num)
+
+                temp_extracted_number.append(temp_num)
+
+            self._extraction_dict[ruota_ind] = ruota_numbers_list
+
