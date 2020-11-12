@@ -64,7 +64,7 @@ def generate_tickets(tickets_number):
 
         print()
         print()
-        
+
     return tickets_list
 
 def main():
@@ -73,7 +73,7 @@ def main():
     print()
 
     print("How many tickets do you want generate?")
-    print("Please, write a number between 1-%d; 0 to exit:"%MAX_BILLS) 
+    print("Please, write a number between 1-{}; 0 to exit:".format(MAX_BILLS)) 
     n_of_tickets = input("- ")
     while n_of_tickets.isdigit()==False or int(n_of_tickets)>MAX_BILLS:
         print("The value must be a valid integer number!")
