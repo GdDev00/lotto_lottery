@@ -4,7 +4,7 @@ from lotto.ticket import Ticket
 from lotto.city import City
 from lotto.bet_type import BetType
 from lotto.print_utils import PrintUtils
-
+from lotto.extraction import Extraction
 MAX_BILLS = 5
 
 
@@ -111,6 +111,9 @@ def print_tickets(tickets_list):
 
 
 def main():
+    aa = Extraction()
+    print(aa)
+
     parser = argparse.ArgumentParser(description="Lotto ticket")
     parser.add_argument("-n", type=int, help='amount of ticket or numbers', choices=list(range(1,MAX_BILLS+1)))
     args = parser.parse_args()
