@@ -8,10 +8,12 @@ class PrintUtils():
     #    "+-----------+"
     @staticmethod
     def print_horizontal_line_separator():
-        print("+",end="")    
-        for _ in range(PrintUtils._MAX_TERMINAL_LINE_LENGHT-2):
-            print("-",end="")
-        print("+")
+        print("+{:-<33}+".format('-'))
+
+        #print("+",end="")    
+        #for _ in range(PrintUtils._MAX_TERMINAL_LINE_LENGHT-2):
+        #    print("-",end="")
+        #print("+")
 
 
     #print a table row
@@ -42,63 +44,16 @@ class PrintUtils():
     def print_line(line, align = 0):
         #align left
         if align == 0:
-            print("+",end=" ")
-            
-            if(len(line) > PrintUtils._MAX_TERMINAL_LINE_LENGHT):
-                print(line,end="")
-            else:
-                newLine = line
+            print("+ {:31} +".format(line))
 
-                #add right spaces 
-                while True:
-                    if len(newLine)<PrintUtils._MAX_TERMINAL_LINE_LENGHT-3:
-                        newLine += " "
-                    else:
-                        break
-
-                print(newLine,end="")
-
-            print("+")
-        
-        #align center
+        #center align
         elif align == 1:
-            print("+",end="")
-
-            if(len(line) > PrintUtils._MAX_TERMINAL_LINE_LENGHT):
-                print(line,end="")
-            else:        
-                # calculate the number of left spaces
-                left_spaces = ((PrintUtils._MAX_TERMINAL_LINE_LENGHT-1-len(line))//2)
-
-                #add left spaces
-                newLine = " " * left_spaces
-
-                newLine += line
-
-                #add the right spaces
-                while True:
-                    if (len(newLine)<PrintUtils._MAX_TERMINAL_LINE_LENGHT-2):
-                        newLine += " "
-                    else:
-                        break
-
-                print(newLine,end="")
-
-            print("+")
-
-        #align right
-        elif align == 2:
-            print("+",end="")
-            
-            if len(line)>PrintUtils._MAX_TERMINAL_LINE_LENGHT:
-                print(line)
-            else:
-                n_of_spaces = PrintUtils._MAX_TERMINAL_LINE_LENGHT-len(line)-2
-                newLine = " " * n_of_spaces
-                newLine += line
-                print(newLine,end="")
-            print("+")
+           print("+ {:^31} +".format(line))
         
+        #right align
+        elif align == 2:
+            print("+ {:>31} +".format(line))
+
         #align parameter not valid
         else:
             raise ValueError("Align parameter is not valid!")
