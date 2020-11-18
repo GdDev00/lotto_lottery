@@ -28,7 +28,9 @@ class Extraction:
         for city,value in self.extraction.items():
             city_name = City.get_city_name_by_index(city+1)
 
-            return_str += "{:8}: {n[0]} {n[1]} {n[2]} {n[3]} {n[4]}".format(city_name,n=value)
+            return_str += "{:8}: ".format(city_name)
+            for num in value:
+                return_str += "{:2d}  ".format(num)
             return_str += "\n"
 
         return return_str
