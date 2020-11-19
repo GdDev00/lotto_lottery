@@ -10,12 +10,6 @@ class PrintUtils():
     def print_horizontal_line_separator():
         print("+{:-<33}+".format('-'))
 
-        #print("+",end="")    
-        #for _ in range(PrintUtils._MAX_TERMINAL_LINE_LENGHT-2):
-        #    print("-",end="")
-        #print("+")
-
-
     #print a table row
     #ex. 
     #    +--------+

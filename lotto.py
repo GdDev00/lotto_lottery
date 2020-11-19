@@ -23,7 +23,7 @@ def generate_tickets(n_ticket):
 
         print("Please, choose the type of bet: ")
         #print choose options
-        for key, value in BetType.BET_TYPE_DICT.items():
+        for key, value in enumerate(BetType.get_bets_type(),1):
             print("{0}: {1}".format(key,value))
 
         print()
