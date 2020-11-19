@@ -1,20 +1,24 @@
 class BetType():
-    BET_TYPE_DICT = {1:"Ambata",2:"Ambo",3:"Terna",4:"Quaterna",5:"Cinquina"}
+    BETS_TYPE = ["Ambata","Ambo","Terna","Quaterna","Cinquina"]
 
     def __init__(self,type_index):
         #validate input
         if BetType.is_bet_type_allowed(type_index) == True:
-            self._type_index = type_index
+            self._type_index = type_index - 1
         else:
             raise ValueError("Bet type is not valid!")
 
     #GET METHODS
     def get_bet_type_index(self):
-        return self._type_index
+        return self._type_index + 1
 
     def get_bet_type_name(self):
-        return self.BET_TYPE_DICT[self._type_index]
+        return self.BETS_TYPE[self._type_index]
     
+    @staticmethod
+    def get_bets_type():
+        return BetType.BETS_TYPE
+
 
     #Check if the bet type index is valid
     #@parameter type_index -> the type to find
@@ -23,7 +27,8 @@ class BetType():
     @staticmethod
     def is_bet_type_allowed(type_index):
         if isinstance(type_index,int):
-            if type_index in BetType.BET_TYPE_DICT.keys():
+            type_index = type_index -1
+            if type_index >=0 and type_index < len(BetType.BETS_TYPE):
                 return True
         
         return False
@@ -35,7 +40,7 @@ class BetType():
     @staticmethod
     def get_bet_type_name_by_index(type_index):
         if BetType.is_bet_type_allowed(type_index) == True:
-            return BetType.BET_TYPE_DICT[type_index]
+            return BetType.BETS_TYPE[type_index]
         else:
             return ""
 
@@ -49,8 +54,7 @@ class BetType():
             type_name = type_name.strip()
             type_name = type_name.capitalize()
 
-            for key, value in BetType.BET_TYPE_DICT.items():
-                if value == type_name:
-                    return key
-        
+            for number, name in enumerate(BetType.BETS_TYPE,1):
+                if name == type_name:
+                    return number
         return -1

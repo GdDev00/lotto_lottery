@@ -1,21 +1,25 @@
 class City:
-    ALLOWED_CITIES_DICT = {1:"Bari", 2:"Cagliari", 3:"Firenze", 4:"Genova", 5:"Milano", 6:"Napoli", 7:"Palermo",\
-         8:"Roma", 9:"Torino", 10:"Venezia", 11:"Tutte"}
+    ALLOWED_CITIES = ["Bari", "Cagliari", "Firenze", "Genova", "Milano", "Napoli", "Palermo",\
+         "Roma", "Torino", "Venezia", "Tutte"]
 
     #Class init method
     def __init__(self, city_index):
         #validate input
         if City.is_city_index_allowed(city_index):
-            self._city_index = city_index
+            self._city_index = city_index - 1
         else:
             raise ValueError("City is not valid!")
 
     #GET METHODS
     def get_city_index(self):
-        return self._city_index
+        return self._city_index + 1
 
     def get_city_name(self):
-        return self.ALLOWED_CITIES_DICT[self._city_index]
+        return self.ALLOWED_CITIES[self._city_index]
+
+    @staticmethod
+    def get_cities():
+        return City.ALLOWED_CITIES
             
     #Check if a city index is allowed
     #@parameter city_index -> the city index to check
@@ -24,7 +28,8 @@ class City:
     @staticmethod
     def is_city_index_allowed(city_index):
         if isinstance(city_index,int):
-            if city_index in City.ALLOWED_CITIES_DICT.keys():
+            city_index = city_index - 1
+            if city_index >= 0 and city_index < len(City.ALLOWED_CITIES):
                 return True
 
         return False
@@ -40,7 +45,7 @@ class City:
             city_name = city_name.strip()
             city_name = city_name.capitalize()
 
-            for key,value in City.ALLOWED_CITIES_DICT.items():
+            for key,value in enumerate(City.ALLOWED_CITIES,1):
                 if value == city_name:
                     return key
         
@@ -54,6 +59,6 @@ class City:
     @staticmethod
     def get_city_name_by_index(city_index):
         if City.is_city_index_allowed(city_index) == True:
-            return City.ALLOWED_CITIES_DICT[city_index]
+            return City.ALLOWED_CITIES[city_index]
         else:
             return ""
