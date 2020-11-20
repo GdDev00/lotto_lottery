@@ -5,6 +5,7 @@ from lotto.city import City
 from lotto.bet_type import BetType
 from lotto.print_utils import PrintUtils
 from lotto.extraction import Extraction
+
 MAX_BILLS = 5
 
 
@@ -109,19 +110,39 @@ def print_tickets(tickets_list):
 
         print("\n\n")
 
+def print_extractions(extraction):
+    PrintUtils.print_header_line("Italian Lottery - Extraction")
+
+    extraction_str = str(extraction)
+    lines = extraction_str.splitlines()
+    for line in lines:
+        PrintUtils.print_line(line)
+    
+    print()
+
+def is_winning_ticket(extraction,ticket):
+    tutte_index = City.get_city_index("Tutte")
+    #if the city is not "Tutte"
+    if ticket.city.get_city_name() != tutte_index:
+        ticket_number = ticket.numbers
+        ticket_city = ticket.city.get_city_index()
+        winning_numer_count = 0
+        for val in extraction.items():
+            if val in ticket_number:
+                winning_numer_count+=1
+        
+        
+        
+
 
 def main():
-    aa = Extraction()
-    print(aa)
-
     parser = argparse.ArgumentParser(description="Lotto ticket")
     parser.add_argument("-n", type=int, help='amount of ticket or numbers', choices=list(range(1,MAX_BILLS+1)))
     args = parser.parse_args()
     n_of_tickets = args.n
 
     while True:
-        PrintUtils.print_header_line("Italian Lottery")
-        PrintUtils.print_table_row("Ticket generator")
+        PrintUtils.print_header_line("Italian Lottery - Ticket Gen.")
         print()
 
         #no paramater from cli
@@ -150,6 +171,12 @@ def main():
         print_tickets(tickets)
 
         n_of_tickets = None
+
+    print() print() print()
+    
+    #generate extractions
+    extraction = Extraction()
+    print_extractions(extraction)
 
 if __name__ == "__main__":
     main()

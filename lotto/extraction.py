@@ -9,7 +9,7 @@ class Extraction:
     def _extract():
         extraction_dict = {}
 
-        for key in range(len(City.ALLOWED_CITIES_DICT)-1):
+        for key in range(0,len(City.get_cities())-1):
             temp_num = randrange(1,91)
             temp_extracted_number = []
             for _ in range(5):
@@ -22,7 +22,10 @@ class Extraction:
             extraction_dict[key] = temp_extracted_number
         
         return extraction_dict
-                    
+
+    def get_extraction(self):
+        return self.extraction
+
     def __str__(self):
         return_str = "" 
         for city,value in self.extraction.items():

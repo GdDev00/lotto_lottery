@@ -40,7 +40,7 @@ class BetType():
     @staticmethod
     def get_bet_type_name_by_index(type_index):
         if BetType.is_bet_type_allowed(type_index) == True:
-            return BetType.BETS_TYPE[type_index]
+            return BetType.BETS_TYPE[type_index-1]
         else:
             return ""
 

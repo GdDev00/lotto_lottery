@@ -59,6 +59,6 @@ class City:
     @staticmethod
     def get_city_name_by_index(city_index):
         if City.is_city_index_allowed(city_index) == True:
-            return City.ALLOWED_CITIES[city_index]
+            return City.ALLOWED_CITIES[city_index-1]
         else:
             return ""
