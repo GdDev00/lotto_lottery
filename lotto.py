@@ -116,20 +116,27 @@ def print_extractions(extraction):
     PrintUtils.print_horizontal_line_separator()
     print()
 
-def is_winning_tickets(tickets,extraction):
-    for ticket in tickets:
-        # check if the city is "Tutte"
-        tutte_index = City.get_city_index_by_name("Tutte")
-        if ticket.city.get_city_index() == tutte_index:
-            pass
+def is_winning_tickets(ticket,extraction):
+    winning_number_count = 0
 
-        #city isn't "Tutte"
-        else:
-            winning_number_count = 0
-            for val in ticket.get_numbers():
-                print(val)
-                if val in extraction[ticket.city.get_city_index()]:
+    # check if the city is "Tutte"
+    tutte_index = City.get_city_index_by_name("Tutte")
+    if ticket.city.get_city_index() == tutte_index:
+        for tck_val in ticket.get_numbers():
+            for key, extract_value in extraction.items():
+                if tck_val in extract_value:
                     winning_number_count+=1
+
+    #city isn't "Tutte"
+    else:
+        for tck_val in ticket.get_numbers():
+            if tck_val in extraction[ticket.city.get_city_index()]:
+                winning_number_count+=1
+
+    if winning_number_count >= ticket.get_minimum_number_amount(ticket.get_bets_type()):
+        return True
+    else:
+        return False
         
         
         
@@ -178,10 +185,16 @@ def main():
         print_extractions(extraction)
 
         #check extractions
-        is_winning_tickets(tickets,extraction.get_extraction())
+        for ind, ticket in enumerate(tickets,1):
+            if is_winning_tickets(ticket,extraction.get_extraction()) == True:
+                PrintUtils.print_line("Ticket {0} is winning!".format(ind))
+            else:
+                PrintUtils.print_line("Ticket {0} is losing!".format(ind))
 
         n_of_tickets = None
-
+        print()
+        print()
+        print()
     print() 
     
 

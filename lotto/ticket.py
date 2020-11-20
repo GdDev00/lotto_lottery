@@ -29,7 +29,7 @@ class Ticket():
         #print numbers
         return_str += ""
         for number in self.numbers:
-            return_str += str(number) 
+            return_str += str(number) + " "
         return_str += "\n"
 
         return return_str
@@ -37,6 +37,8 @@ class Ticket():
     def get_numbers(self):
         return self.numbers   
 
+    def get_bets_type(self):
+        return self.bets_type_list
     #private method
     #Generate random numbers for the ticket
     #@return -> a list with generate numbers
