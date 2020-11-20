@@ -1,5 +1,5 @@
 class BetType():
-    BETS_TYPE = ["Ambata","Ambo","Terna","Quaterna","Cinquina"]
+    BETS_TYPE = ["Ambata","Ambo","Terno","Quaterna","Cinquina"]
 
     def __init__(self,type_index):
         #validate input
