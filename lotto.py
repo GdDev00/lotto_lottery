@@ -14,7 +14,7 @@ MAX_BILLS = 5
 #@return -> a ticket list
 def generate_tickets(n_ticket):
     ticekt_list = []
-
+    
     for i in range(n_ticket):
         PrintUtils.print_table_row("Ticket {0}".format(i+1))
 
@@ -22,12 +22,10 @@ def generate_tickets(n_ticket):
         #SELECT TYPE OF BET
         bet_type_list = []
 
-        print("Please, choose the type of bet: ")
+        PrintUtils.print_line("Please, choose the type of bet:")
         #print choose options
         for key, value in enumerate(BetType.get_bets_type(),1):
-            print("{0}: {1}".format(key,value))
-
-        print()
+            PrintUtils.print_line("{0}: {1}".format(key,value))
         selected_bet_type = input("- ")
 
         while True:
@@ -37,7 +35,7 @@ def generate_tickets(n_ticket):
                     bet_type_list.append(BetType(selected_bet_type))
                     break
             
-            print("The value must be a valid integer number from the range!")
+            PrintUtils.print_line("The value must be a valid integer number from the range!")
             selected_bet_type = input("- ")
 
         #print selected value
@@ -53,12 +51,11 @@ def generate_tickets(n_ticket):
         #SELECT CITY
         city = None
 
-        print("Please, choose the city:")
+        PrintUtils.print_line("Please, choose the city:")
         #print choose option
         for key,value in enumerate(City.get_cities(),1):
-            print("{0}: {1}".format(key,value))
+            PrintUtils.print_line("{0}: {1}".format(key,value))
         
-        print()
         selected_city = input("- ")
 
         while True:
@@ -68,7 +65,7 @@ def generate_tickets(n_ticket):
                     city = City(selected_city)
                     break
 
-            print("The value must be a valid integer number from the range!")
+            PrintUtils.print_line("The value must be a valid integer number from the range!")
             selected_city = input("- ")
 
         PrintUtils.print_table_row(city.get_city_name())
@@ -76,9 +73,8 @@ def generate_tickets(n_ticket):
 
         #--------------#
         # SELECT NUMBER AMOUNT
-        print("Please, how many numbers do you want to play?")
-        print("You can play at least {0} and a max of 10 numbers".format(Ticket.get_minimum_number_amount(bet_type_list)))
-        print()
+        PrintUtils.print_line("Please, how many numbers do you want to play?")
+        PrintUtils.print_line("You can play at least {0} and a max of 10 numbers".format(Ticket.get_minimum_number_amount(bet_type_list)))
         numbers_amount = input("- ")
 
         while True:
@@ -87,7 +83,7 @@ def generate_tickets(n_ticket):
                 if Ticket.is_number_amount_allowed(bet_type_list,numbers_amount) == True:
                     break
 
-            print("You can play at least {0} and a max of 10 numbers!".format(Ticket.get_minimum_number_amount(bet_type_list)))
+            PrintUtils.print_line("You can play at least {0} and a max of 10 numbers!".format(Ticket.get_minimum_number_amount(bet_type_list)))
             numbers_amount = input("- ")
 
         #generate Ticket
@@ -104,7 +100,7 @@ def print_tickets(tickets_list):
         PrintUtils.print_line("Ticket {0}".format(ind+1),1)
         PrintUtils.print_line(line[0]) #city
         PrintUtils.print_line(line[1]) #bet
-        PrintUtils.print_line("--- --- ---",1)
+        PrintUtils.print_line("--- --- --- --- --- --- ---",1)
         PrintUtils.print_line(line[2],1)#numbers
         PrintUtils.print_footer_line("Good luck!")
 
@@ -142,24 +138,23 @@ def main():
     n_of_tickets = args.n
 
     while True:
-        PrintUtils.print_header_line("Italian Lottery - Ticket Gen.")
-        print()
+        PrintUtils.print_header_line("Italian Lottery - Ticket")
 
         #no paramater from cli
         if(n_of_tickets == None):
-            print("How many tickets do you want generate?")
-            print("Please, write a number between 1-{}; 0 to exit:".format(MAX_BILLS)) 
+            PrintUtils.print_line("How many tickets do you want generate?")
+            PrintUtils.print_line("Please, write a number between 1-{}; 0 to exit:".format(MAX_BILLS)) 
 
             n_of_tickets = input("- ")
             while n_of_tickets.isdigit()==False or int(n_of_tickets)>MAX_BILLS:
-                print("The value must be a valid integer number!")
+                PrintUtils.print_line("The value must be a valid integer number!")
                 n_of_tickets = input("- ")
             
             n_of_tickets = int(n_of_tickets)
 
         #exit
         if n_of_tickets == 0:
-            print("Quitting...")
+            PrintUtils.print_line("Quitting...")
             quit(0)
 
         print()
@@ -168,6 +163,10 @@ def main():
         tickets = generate_tickets(n_of_tickets)
         
         #print tickets
+        print()
+        PrintUtils.print_table_row("Here are the tickets:")
+        print()
+        print()
         print_tickets(tickets)
 
         #generate extractions
