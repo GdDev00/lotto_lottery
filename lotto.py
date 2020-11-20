@@ -32,7 +32,7 @@ def generate_tickets(n_ticket):
 
         while True:
             if selected_bet_type.isdigit()==True:
-                selected_bet_type = int(selected_bet_type)
+                selected_bet_type = int(selected_bet_type)-1
                 if BetType.is_bet_type_allowed(selected_bet_type) == True:
                     bet_type_list.append(BetType(selected_bet_type))
                     break
@@ -63,7 +63,7 @@ def generate_tickets(n_ticket):
 
         while True:
             if selected_city.isdigit()==True:
-                selected_city = int(selected_city)
+                selected_city = int(selected_city)-1
                 if City.is_city_index_allowed(selected_city) == True:
                     city = City(selected_city)
                     break
@@ -172,7 +172,7 @@ def main():
 
         n_of_tickets = None
 
-    print() print() print()
+    print() 
     
     #generate extractions
     extraction = Extraction()

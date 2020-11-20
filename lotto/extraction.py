@@ -29,7 +29,7 @@ class Extraction:
     def __str__(self):
         return_str = "" 
         for city,value in self.extraction.items():
-            city_name = City.get_city_name_by_index(city+1)
+            city_name = City.get_city_name_by_index(city)
 
             return_str += "{:8}: ".format(city_name)
             for num in value:

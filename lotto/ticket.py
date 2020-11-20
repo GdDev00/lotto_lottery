@@ -75,6 +75,6 @@ class Ticket():
         min_bet_type = 0
         #check in all the bets types what is the minimum number to play
         for bet in bets_type_list:
-            if bet.get_bet_type_index() > min_bet_type:
-                min_bet_type = bet.get_bet_type_index()
+            if bet.get_bet_type_index()+1 > min_bet_type:
+                min_bet_type = bet.get_bet_type_index()+1
         return min_bet_type
