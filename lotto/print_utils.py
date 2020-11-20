@@ -10,6 +10,7 @@ class PrintUtils():
     def print_horizontal_line_separator():
         print("+{:-<33}+".format('-'))
 
+
     #print a table row
     #ex. 
     #    +--------+
@@ -38,16 +39,15 @@ class PrintUtils():
     def print_line(line, align = 0):
         #align left
         if align == 0:
-            print("+ {:31} +".format(line))
-
-        #center align
+            print("+ {:31} +".format(line))        
+        #align center
         elif align == 1:
-           print("+ {:^31} +".format(line))
-        
-        #right align
+            print("+ {:^31} +".format(line))
+
+        #align right
         elif align == 2:
             print("+ {:>31} +".format(line))
-
+        
         #align parameter not valid
         else:
             raise ValueError("Align parameter is not valid!")
