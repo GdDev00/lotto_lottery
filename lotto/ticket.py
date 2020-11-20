@@ -29,9 +29,7 @@ class Ticket():
         #print numbers
         return_str += ""
         for number in self.numbers:
-            return_str += str(number) + " "
-        #remove last ", " from end string
-        return_str = return_str[0:-2]
+            return_str += str(number) 
         return_str += "\n"
 
         return return_str
