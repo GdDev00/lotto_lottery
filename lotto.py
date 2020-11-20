@@ -116,16 +116,20 @@ def print_extractions(extraction):
     PrintUtils.print_horizontal_line_separator()
     print()
 
-def is_winning_ticket(extraction,ticket):
-    tutte_index = City.get_city_index("Tutte")
-    #if the city is not "Tutte"
-    if ticket.city.get_city_name() != tutte_index:
-        ticket_number = ticket.numbers
-        ticket_city = ticket.city.get_city_index()
-        winning_numer_count = 0
-        for val in extraction.items():
-            if val in ticket_number:
-                winning_numer_count+=1
+def is_winning_tickets(tickets,extraction):
+    for ticket in tickets:
+        # check if the city is "Tutte"
+        tutte_index = City.get_city_index_by_name("Tutte")
+        if ticket.city.get_city_index() == tutte_index:
+            pass
+
+        #city isn't "Tutte"
+        else:
+            winning_number_count = 0
+            for val in ticket.get_numbers():
+                print(val)
+                if val in extraction[ticket.city.get_city_index()]:
+                    winning_number_count+=1
         
         
         
@@ -173,6 +177,8 @@ def main():
         extraction = Extraction()
         print_extractions(extraction)
 
+        #check extractions
+        is_winning_tickets(tickets,extraction.get_extraction())
 
         n_of_tickets = None
 

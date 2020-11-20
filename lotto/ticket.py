@@ -36,7 +36,8 @@ class Ticket():
 
         return return_str
 
-            
+    def get_numbers(self):
+        return self.numbers   
 
     #private method
     #Generate random numbers for the ticket
