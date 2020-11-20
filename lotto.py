@@ -117,7 +117,7 @@ def print_extractions(extraction):
     lines = extraction_str.splitlines()
     for line in lines:
         PrintUtils.print_line(line)
-    
+    PrintUtils.print_horizontal_line_separator()
     print()
 
 def is_winning_ticket(extraction,ticket):
@@ -170,13 +170,15 @@ def main():
         #print tickets
         print_tickets(tickets)
 
+        #generate extractions
+        extraction = Extraction()
+        print_extractions(extraction)
+
+
         n_of_tickets = None
 
     print() 
     
-    #generate extractions
-    extraction = Extraction()
-    print_extractions(extraction)
 
 if __name__ == "__main__":
     main()
