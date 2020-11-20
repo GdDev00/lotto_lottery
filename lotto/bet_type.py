@@ -4,13 +4,13 @@ class BetType():
     def __init__(self,type_index):
         #validate input
         if BetType.is_bet_type_allowed(type_index) == True:
-            self._type_index = type_index - 1
+            self._type_index = type_index
         else:
             raise ValueError("Bet type is not valid!")
 
     #GET METHODS
     def get_bet_type_index(self):
-        return self._type_index + 1
+        return self._type_index
 
     def get_bet_type_name(self):
         return self.BETS_TYPE[self._type_index]
@@ -27,7 +27,7 @@ class BetType():
     @staticmethod
     def is_bet_type_allowed(type_index):
         if isinstance(type_index,int):
-            type_index = type_index -1
+            type_index = type_index
             if type_index >=0 and type_index < len(BetType.BETS_TYPE):
                 return True
         
@@ -54,7 +54,7 @@ class BetType():
             type_name = type_name.strip()
             type_name = type_name.capitalize()
 
-            for number, name in enumerate(BetType.BETS_TYPE,1):
+            for number, name in enumerate(BetType.BETS_TYPE,0):
                 if name == type_name:
                     return number
         return -1

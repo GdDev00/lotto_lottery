@@ -6,13 +6,13 @@ class City:
     def __init__(self, city_index):
         #validate input
         if City.is_city_index_allowed(city_index):
-            self._city_index = city_index - 1
+            self._city_index = city_index 
         else:
             raise ValueError("City is not valid!")
 
     #GET METHODS
     def get_city_index(self):
-        return self._city_index + 1
+        return self._city_index 
 
     def get_city_name(self):
         return self.ALLOWED_CITIES[self._city_index]
@@ -28,7 +28,7 @@ class City:
     @staticmethod
     def is_city_index_allowed(city_index):
         if isinstance(city_index,int):
-            city_index = city_index - 1
+            city_index = city_index 
             if city_index >= 0 and city_index < len(City.ALLOWED_CITIES):
                 return True
 
@@ -45,7 +45,7 @@ class City:
             city_name = city_name.strip()
             city_name = city_name.capitalize()
 
-            for key,value in enumerate(City.ALLOWED_CITIES,1):
+            for key,value in enumerate(City.ALLOWED_CITIES,0):
                 if value == city_name:
                     return key
         
