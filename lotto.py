@@ -13,7 +13,7 @@ MAX_BILLS = 5
 #@parameter n_ticket -> number of ticket to generate
 #@return -> a ticket list
 def generate_tickets(n_ticket):
-    ticekt_list = []
+    ticket_list = []
     
     for i in range(n_ticket):
         PrintUtils.print_table_row("Ticket {0}".format(i+1))
@@ -43,7 +43,7 @@ def generate_tickets(n_ticket):
         for bet in bet_type_list:
             print_str+= bet.get_bet_type_name() + " "
 
-        PrintUtils.print_table_row(print_str)
+        PrintUtils.print_table_row("Selected: {}".format(print_str))
         print()
 
 
@@ -54,7 +54,7 @@ def generate_tickets(n_ticket):
         PrintUtils.print_line("Please, choose the city:")
         #print choose option
         for key,value in enumerate(City.get_cities(),1):
-            PrintUtils.print_line("{0}: {1}".format(key,value))
+            PrintUtils.print_line("{:2d}: {}".format(key,value))
         
         selected_city = input("- ")
 
@@ -68,7 +68,7 @@ def generate_tickets(n_ticket):
             PrintUtils.print_line("The value must be a valid integer number from the range!")
             selected_city = input("- ")
 
-        PrintUtils.print_table_row(city.get_city_name())
+        PrintUtils.print_table_row("Selected: {}".format(city.get_city_name()))
         print()
 
         #--------------#
@@ -87,9 +87,10 @@ def generate_tickets(n_ticket):
             numbers_amount = input("- ")
 
         #generate Ticket
-        ticekt_list.append(Ticket(city,bet_type_list,numbers_amount))
+        ticket_list.append(Ticket(city,bet_type_list,numbers_amount))
+        print("\n\n")
 
-    return ticekt_list
+    return ticket_list
 
 def print_tickets(tickets_list):
     for ind, ticket in enumerate(tickets_list):
@@ -115,12 +116,6 @@ def print_extractions(extraction):
         PrintUtils.print_line(line)
     PrintUtils.print_horizontal_line_separator()
     print()
-
-def is_winning_tickets(ticket,extraction):
-    if winning_number_count >= ticket.get_minimum_number_amount(ticket.get_bets_type()):
-        return True
-    else:
-        return False
         
         
         
@@ -158,7 +153,7 @@ def main():
         tickets = generate_tickets(n_of_tickets)
         
         #print tickets
-        PrintUtils.print_table_row("\n Here are the tickets: \n \n")
+        PrintUtils.print_table_row("\n Here are the tickets: \n")
         print_tickets(tickets)
 
         #generate and print extractions
@@ -169,9 +164,9 @@ def main():
         for ind, ticket in enumerate(tickets,1):
             matching_number = extraction.check_matching_number(ticket.city.get_city_index(), ticket.get_numbers())
             if matching_number >= Ticket.get_minimum_number_amount(ticket.get_bets_type()):
-                print("Ticket {0} is WINNING :)".format(ind))
+                PrintUtils.print_table_row("Ticket {0} is WINNING :)".format(ind),1)
             else:
-                print("Ticket {0} is LOSER :(".format(ind))
+                PrintUtils.print_table_row("Ticket {0} is LOSER :(".format(ind),1)
 
 
         n_of_tickets = None
