@@ -26,6 +26,24 @@ class Extraction:
     def get_extraction(self):
         return self.extraction
 
+    def is_winning(city_index, city):
+        winning_number_count = 0
+
+        # check if the city is "Tutte"
+        tutte_index = City.get_city_index_by_name("Tutte")
+        if city.get_city_index() == tutte_index:
+            for tck_val in ticket.get_numbers():
+                for key, extract_value in extraction.items():
+                    if tck_val in extract_value:
+                        winning_number_count+=1
+
+        #city isn't "Tutte"
+        else:
+            for tck_val in ticket.get_numbers():
+                if tck_val in extraction[ticket.city.get_city_index()]:
+                    winning_number_count+=1
+
+
     def __str__(self):
         return_str = "" 
         for city,value in self.extraction.items():

@@ -117,21 +117,6 @@ def print_extractions(extraction):
     print()
 
 def is_winning_tickets(ticket,extraction):
-    winning_number_count = 0
-
-    # check if the city is "Tutte"
-    tutte_index = City.get_city_index_by_name("Tutte")
-    if ticket.city.get_city_index() == tutte_index:
-        for tck_val in ticket.get_numbers():
-            for key, extract_value in extraction.items():
-                if tck_val in extract_value:
-                    winning_number_count+=1
-
-    #city isn't "Tutte"
-    else:
-        for tck_val in ticket.get_numbers():
-            if tck_val in extraction[ticket.city.get_city_index()]:
-                winning_number_count+=1
 
     if winning_number_count >= ticket.get_minimum_number_amount(ticket.get_bets_type()):
         return True
