@@ -3,7 +3,31 @@ The purpose of the entire project is to create the Italian Lotto game in Python 
 For more info check about the game check: https://www.sisal.it/lotto/come-si-gioca .\
 For the project purpose, **it completely ignore "ruota nazionale" and the "estratto determinato" play type.**
 
-The project is composed by 4 level. In this branch, it is developed the first level.
+The project is composed by 4 level. In this branch, it is developed the second level.
+* ## Level 2: Lotto Fake Extraction
+Level two of this project requires to add a lotto number extraction phase and to check if some of the tickets you generated result winners.
+**Example**\
+```
++---------------------------------+
++  Italian Lottery - Extraction   +
++---------------------------------+
++ Bari    : 86  21  22  79  58    +
++ Cagliari: 75   2   1  36  34    +
++ Firenze :  7  13  85  23  55    +
++ Genova  : 30  84  27  17  62    +
++ Milano  :  6  19  46  32  82    +
++ Napoli  : 72  28  14  46  54    +
++ Palermo : 30  16  82   9  49    +
++ Roma    : 49  85  46   1  28    +
++ Torino  : 69  65  64  45  44    +
++ Venezia : 45   3  28  65  54    +
++---------------------------------+
+
++---------------------------------+
++      Ticket 1 is LOSER :(       +
++---------------------------------+
+```
+Compared to the first level, a class called "extraction" has been added. 
 
 * ## Level 1: Lotto Ticket Generator
   Level one of this project requires to develop a lotto ticket generator.\

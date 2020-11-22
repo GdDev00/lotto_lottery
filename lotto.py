@@ -92,6 +92,7 @@ def generate_tickets(n_ticket):
 
     return ticket_list
 
+#print the tickets
 def print_tickets(tickets_list):
     for ind, ticket in enumerate(tickets_list):
         ticket_str = str(ticket)
@@ -107,6 +108,7 @@ def print_tickets(tickets_list):
 
         print("\n\n")
 
+#print an extraction
 def print_extractions(extraction):
     PrintUtils.print_header_line("Italian Lottery - Extraction")
 
@@ -117,6 +119,7 @@ def print_extractions(extraction):
     PrintUtils.print_horizontal_line_separator()
     print()
         
+#check if many tickets are winning
 def check_winning(extraction, tickets_list):
     for ind, ticket in enumerate(tickets_list,1):
         matching_number = extraction.check_matching_number(ticket.city.get_city_index(), ticket.get_numbers())
