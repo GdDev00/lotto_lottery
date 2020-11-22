@@ -94,6 +94,9 @@ def generate_tickets(n_ticket):
 
 #print the tickets
 def print_tickets(tickets_list):
+    print()
+    PrintUtils.print_table_row("Here are the tickets:")
+    print()
     for ind, ticket in enumerate(tickets_list):
         ticket_str = str(ticket)
         line = ticket_str.splitlines()
@@ -162,7 +165,6 @@ def main():
         tickets = generate_tickets(n_of_tickets)
         
         #print tickets
-        PrintUtils.print_table_row("\n Here are the tickets: \n")
         print_tickets(tickets)
 
         #generate and print extractions
