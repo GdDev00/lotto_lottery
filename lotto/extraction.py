@@ -30,7 +30,7 @@ class Extraction:
     def get_extraction(self):
         return self.extraction
 
-    #check if some numbers are the corrispective city index
+    #check if some numbers are in the corrispective city index
     #@return -> the number of matching numbers
     #@return -1 if the parameter are not valid!
     def check_matching_number(self, city_index, numbers_to_check):
