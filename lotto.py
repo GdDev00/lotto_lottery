@@ -42,7 +42,7 @@ def generate_tickets(n_ticket):
         for bet in bet_type_list:
             print_str+= bet.get_bet_type_name() + " "
 
-        PrintUtils.print_table_row(print_str)
+        PrintUtils.print_table_row("Selected: {}".format(print_str))
         print()
 
 
@@ -53,7 +53,7 @@ def generate_tickets(n_ticket):
         PrintUtils.print_line("Please, choose the city:")
         #print choose option
         for key,value in enumerate(City.get_cities(),1):
-            PrintUtils.print_line("{0}: {1}".format(key,value))
+            PrintUtils.print_line("{:2d}: {}".format(key,value))
         
         selected_city = input("- ")
 
@@ -67,7 +67,7 @@ def generate_tickets(n_ticket):
             PrintUtils.print_line("The value must be a valid integer number from the range!")
             selected_city = input("- ")
 
-        PrintUtils.print_table_row(city.get_city_name())
+        PrintUtils.print_table_row("Selected: {}".format(city.get_city_name()))
         print()
 
         #--------------#
@@ -87,6 +87,7 @@ def generate_tickets(n_ticket):
 
         #generate Ticket
         ticekt_list.append(Ticket(city,bet_type_list,numbers_amount))
+        print("\n\n")
 
     return ticekt_list
 
@@ -140,7 +141,6 @@ def main():
         #print tickets
         print()
         PrintUtils.print_table_row("Here are the tickets:")
-        print()
         print()
         print_tickets(tickets)
 
