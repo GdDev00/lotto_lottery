@@ -117,7 +117,13 @@ def print_extractions(extraction):
     PrintUtils.print_horizontal_line_separator()
     print()
         
-        
+def check_winning(extraction, tickets_list):
+    for ind, ticket in enumerate(tickets_list,1):
+        matching_number = extraction.check_matching_number(ticket.city.get_city_index(), ticket.get_numbers())
+        if matching_number >= Ticket.get_minimum_number_amount(ticket.get_bets_type()):
+            PrintUtils.print_table_row("Ticket {0} is WINNING :)".format(ind),1)
+        else:
+            PrintUtils.print_table_row("Ticket {0} is LOSER :(".format(ind),1)
         
 
 
@@ -161,13 +167,7 @@ def main():
         print_extractions(extraction)
 
         #check extractions
-        for ind, ticket in enumerate(tickets,1):
-            matching_number = extraction.check_matching_number(ticket.city.get_city_index(), ticket.get_numbers())
-            if matching_number >= Ticket.get_minimum_number_amount(ticket.get_bets_type()):
-                PrintUtils.print_table_row("Ticket {0} is WINNING :)".format(ind),1)
-            else:
-                PrintUtils.print_table_row("Ticket {0} is LOSER :(".format(ind),1)
-
+        check_winning(extraction, tickets)
 
         n_of_tickets = None
         print("\n \n \n")
