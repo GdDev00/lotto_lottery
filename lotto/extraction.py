@@ -6,6 +6,9 @@ class Extraction:
         self.extraction = Extraction._extract()
 
     @staticmethod
+    #Generate a lotto extraction dict
+    #It is composed by a dictionary, key are the city index (please refer city class)
+    #and value are 5 random number
     def _extract():
         extraction_dict = {}
 
@@ -23,25 +26,36 @@ class Extraction:
         
         return extraction_dict
 
+    #return the generated lotto dictionary
     def get_extraction(self):
         return self.extraction
 
-    def is_winning(city_index, city):
-        winning_number_count = 0
+    #check if some numbers are the corrispective city index
+    #@return -> the number of matching numbers
+    #@return -1 if the parameter are not valid!
+    def check_matching_number(self, city_index, numbers_to_check):
+        #check parameter
+        if City.is_city_index_allowed(city_index) == False or \
+            isinstance(numbers_to_check,list) == False:
+            return -1
+
+        matching_number_count = 0
 
         # check if the city is "Tutte"
         tutte_index = City.get_city_index_by_name("Tutte")
-        if city.get_city_index() == tutte_index:
-            for tck_val in ticket.get_numbers():
-                for key, extract_value in extraction.items():
+        if city_index == tutte_index:
+            for tck_val in numbers_to_check:
+                for key, extract_value in self.extraction.items():
                     if tck_val in extract_value:
-                        winning_number_count+=1
+                        matching_number_count+=1
 
         #city isn't "Tutte"
         else:
-            for tck_val in ticket.get_numbers():
-                if tck_val in extraction[ticket.city.get_city_index()]:
-                    winning_number_count+=1
+            for tck_val in numbers_to_check:
+                if tck_val in self.extraction[city_index]:
+                    matching_number_count+=1
+
+        return matching_number_count
 
 
     def __str__(self):

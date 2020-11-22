@@ -117,7 +117,6 @@ def print_extractions(extraction):
     print()
 
 def is_winning_tickets(ticket,extraction):
-
     if winning_number_count >= ticket.get_minimum_number_amount(ticket.get_bets_type()):
         return True
     else:
@@ -159,27 +158,24 @@ def main():
         tickets = generate_tickets(n_of_tickets)
         
         #print tickets
-        print()
-        PrintUtils.print_table_row("Here are the tickets:")
-        print()
-        print()
+        PrintUtils.print_table_row("\n Here are the tickets: \n \n")
         print_tickets(tickets)
 
-        #generate extractions
+        #generate and print extractions
         extraction = Extraction()
         print_extractions(extraction)
 
         #check extractions
         for ind, ticket in enumerate(tickets,1):
-            if is_winning_tickets(ticket,extraction.get_extraction()) == True:
-                PrintUtils.print_line("Ticket {0} is winning!".format(ind))
+            matching_number = extraction.check_matching_number(ticket.city.get_city_index(), ticket.get_numbers())
+            if matching_number >= Ticket.get_minimum_number_amount(ticket.get_bets_type()):
+                print("Ticket {0} is WINNING :)".format(ind))
             else:
-                PrintUtils.print_line("Ticket {0} is losing!".format(ind))
+                print("Ticket {0} is LOSER :(".format(ind))
+
 
         n_of_tickets = None
-        print()
-        print()
-        print()
+        print("\n \n \n")
     print() 
     
 
