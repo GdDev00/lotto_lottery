@@ -1,4 +1,5 @@
 from city import City
+from ticket import Ticket
 from random import randrange
 
 class Extraction:
@@ -52,6 +53,30 @@ class Extraction:
         #city isn't "Tutte"
         else:
             for tck_val in numbers_to_check:
+                if tck_val in self.extraction[city_index]:
+                    matching_number_count+=1
+
+        return matching_number_count
+    
+    def check_ticket_winning(ticket):
+        #check parameter
+        if City.is_city_index_allowed(ticket.city.get_city_index()) == False or \
+            isinstance(ticket.get_numbers(),list) == False:
+            return -1
+
+        matching_number_count = 0
+
+        # check if the city is "Tutte"
+        tutte_index = City.get_city_index_by_name("Tutte")
+        if ticket.city.get_city_index() == tutte_index:
+            for tck_val in ticket.get_numbers():
+                for key, extract_value in self.extraction.items():
+                    if tck_val in extract_value:
+                        matching_number_count+=1
+
+        #city isn't "Tutte"
+        else:
+            for tck_val in ticket.get_numbers():
                 if tck_val in self.extraction[city_index]:
                     matching_number_count+=1
 
