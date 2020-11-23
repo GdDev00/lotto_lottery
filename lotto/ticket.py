@@ -59,7 +59,7 @@ class Ticket():
 
             number_list.append(number)
         
-        return number_list
+        return sorted(number_list)
 
     @staticmethod
     def is_number_amount_allowed(bets_type_list, number_amount):
