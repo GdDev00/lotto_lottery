@@ -28,6 +28,7 @@ Level two of this project requires to add a lotto number extraction phase and to
 +---------------------------------+
 ```
 Compared to the first level, a class called "extraction" has been added. 
+All the business logic functions are enclose into LottoManager class
 
 * ## Level 1: Lotto Ticket Generator
   Level one of this project requires to develop a lotto ticket generator.\
