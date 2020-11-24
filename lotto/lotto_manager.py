@@ -26,9 +26,9 @@ class LottoManager():
             selected_bet_type = input("- ")
 
             while True:
-                if selected_bet_type.isdigit()==True:
+                if selected_bet_type.isdigit():
                     selected_bet_type = int(selected_bet_type)-1
-                    if BetType.is_bet_type_allowed(selected_bet_type) == True:
+                    if BetType.is_bet_type_allowed(selected_bet_type):
                         bet_type_list.append(BetType(selected_bet_type))
                         break
                 
@@ -56,9 +56,9 @@ class LottoManager():
             selected_city = input("- ")
 
             while True:
-                if selected_city.isdigit()==True:
+                if selected_city.isdigit():
                     selected_city = int(selected_city)-1
-                    if City.is_city_index_allowed(selected_city) == True:
+                    if City.is_city_index_allowed(selected_city):
                         city = City(selected_city)
                         break
 
@@ -75,9 +75,9 @@ class LottoManager():
             numbers_amount = input("- ")
 
             while True:
-                if numbers_amount.isdigit() == True:
+                if numbers_amount.isdigit():
                     numbers_amount = int(numbers_amount)
-                    if Ticket.is_number_amount_allowed(bet_type_list,numbers_amount) == True:
+                    if Ticket.is_number_amount_allowed(bet_type_list,numbers_amount):
                         break
 
                 PrintUtils.print_line("You can play at least {0} and a max of 10 numbers!".format(Ticket.get_minimum_number_amount(bet_type_list)))
@@ -122,7 +122,7 @@ class LottoManager():
         extraction_str = str(extraction)
         lines = extraction_str.splitlines()
         for line in lines:
-            PrintUtils.print_line(line)
+            PrintUtils.print_line(line,1)
         PrintUtils.print_horizontal_line_separator()
         print()
     
