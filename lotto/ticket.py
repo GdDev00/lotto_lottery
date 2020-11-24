@@ -1,44 +1,59 @@
 from random import randrange
 
 class Ticket():
-    def __init__(self,city, bets_type_list, numbers_amount):
+    def __init__(self,city, bets_type_list, numbers_amount, money):
 
-        self.city = city #city
+        self._city = city #city
 
-        self.bets_type_list = bets_type_list #list(bet_type)
+        self._bets_type_list = bets_type_list #list(bet_type)
 
         #check numbers amount validity
         if Ticket.is_number_amount_allowed(bets_type_list,numbers_amount):
-            self.numbers_amount = numbers_amount
-            self.numbers = Ticket._generate_numbers(self.numbers_amount)
+            self._numbers_amount = numbers_amount
+            self._numbers = Ticket._generate_numbers(self._numbers_amount)
         else:
             raise ValueError("The number amount is not coerent with the bet type list!")
+
+        #check money validity
+        if Ticket.is_money_allowed(money):
+            self._money = money
     
+    def get_city(self):
+        return self._city
+
+    def get_numbers(self):
+        return self._numbers   
+
+    def get_bets_type(self):
+        return self._bets_type_list
+    
+    def get_money(self):
+        return self._money
 
     def __str__(self):
-        return_str = "City: {0}\n".format(self.city.get_city_name())
+        #print city
+        return_str = "City: {0}\n".format(self._city.get_city_name())
 
         #print bet
-        return_str += "Bet: "
-        for bet in self.bets_type_list:
+        return_str += "Bet type: "
+        for bet in self._bets_type_list:
             return_str += bet.get_bet_type_name() + ", "
         #remove last ", " from end string
         return_str = return_str[0:-2]
         return_str += "\n"
 
+        #print money
+        return_str += "Bet money: {}€\n".format(self._money)
+
         #print numbers
         return_str += ""
-        for number in self.numbers:
+        for number in self._numbers:
             return_str += str(number) + " "
         return_str += "\n"
 
         return return_str
 
-    def get_numbers(self):
-        return self.numbers   
 
-    def get_bets_type(self):
-        return self.bets_type_list
     #private method
     #Generate random numbers for the ticket
     #@return -> a list with generate numbers
@@ -79,3 +94,11 @@ class Ticket():
             if bet.get_bet_type_index()+1 > min_bet_type:
                 min_bet_type = bet.get_bet_type_index()+1
         return min_bet_type
+
+    @staticmethod
+    def is_money_allowed(money):
+        if isinstance(money, float):
+            if money >= 1.00 and money <=200.00:
+                if money % 0.50 == 0: #money are a multiple of 0.50 cents
+                    return True
+        return False
