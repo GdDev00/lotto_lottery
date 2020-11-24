@@ -38,21 +38,20 @@ class PrintUtils():
     @staticmethod
     def print_line(line, align = 0):
         sub_lines = []
-        words = line.split()
 
-        #for i in range(0,len(line), PrintUtils._MAX_TERMINAL_LINE_LENGHT):
-        #   s = ""
-        #   while True:
-        s = ""
-        for key, word in enumerate(words):
-            if len(s)  + len(word) + 1 < PrintUtils._MAX_TERMINAL_LINE_LENGHT:
-                s = s + word + " "
-            else:
-                sub_lines.append(s)
-                s = word + " "
+        if len(line) > PrintUtils._MAX_TERMINAL_LINE_LENGHT:
+            words = line.split()
+            s = ""
+            for key, word in enumerate(words):
+                if len(s)  + len(word) + 1 < PrintUtils._MAX_TERMINAL_LINE_LENGHT:
+                    s = s + word + " "
+                else:
+                    sub_lines.append(s)
+                    s = word + " "
 
-        sub_lines.append(s)
-
+            sub_lines.append(s)
+        else:
+            sub_lines.append(line)
 
 
         for element in sub_lines:

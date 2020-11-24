@@ -26,9 +26,9 @@ class LottoManager():
             selected_bet_type = input("- ")
 
             while True:
-                if selected_bet_type.isdigit()==True:
+                if selected_bet_type.isdigit():
                     selected_bet_type = int(selected_bet_type)-1
-                    if BetType.is_bet_type_allowed(selected_bet_type) == True:
+                    if BetType.is_bet_type_allowed(selected_bet_type):
                         bet_type_list.append(BetType(selected_bet_type))
                         break
                 
@@ -56,9 +56,9 @@ class LottoManager():
             selected_city = input("- ")
 
             while True:
-                if selected_city.isdigit()==True:
+                if selected_city.isdigit():
                     selected_city = int(selected_city)-1
-                    if City.is_city_index_allowed(selected_city) == True:
+                    if City.is_city_index_allowed(selected_city):
                         city = City(selected_city)
                         break
 
@@ -75,16 +75,37 @@ class LottoManager():
             numbers_amount = input("- ")
 
             while True:
-                if numbers_amount.isdigit() == True:
+                if numbers_amount.isdigit():
                     numbers_amount = int(numbers_amount)
-                    if Ticket.is_number_amount_allowed(bet_type_list,numbers_amount) == True:
+                    if Ticket.is_number_amount_allowed(bet_type_list,numbers_amount):
                         break
 
                 PrintUtils.print_line("You can play at least {0} and a max of 10 numbers!".format(Ticket.get_minimum_number_amount(bet_type_list)))
                 numbers_amount = input("- ")
+            print()
 
-            #generate Ticket
-            ticket_list.append(Ticket(city,bet_type_list,numbers_amount))
+
+            #--------------#
+            # SELECT MONEY TO PLAY
+            PrintUtils.print_line("Please, how much do you want to play?")
+            PrintUtils.print_line("The minimum bet on a Lotto ticket is € 1.00")
+            PrintUtils.print_line("The maximum is € 200.00 with denominations of € 0.50")
+            money = input("- ")
+
+            while True:
+                try:
+                    money = float(money)
+                    if Ticket.is_money_allowed(money):
+                        break
+                except:
+                    pass
+
+                PrintUtils.print_line("Please, write a valid numeric value!")  
+                money = input("- ")
+
+
+            #GENERATE TICKET
+            ticket_list.append(Ticket(city,bet_type_list,numbers_amount,money))
             print("\n\n")
 
         return ticket_list
@@ -101,10 +122,11 @@ class LottoManager():
 
             PrintUtils.print_header_line("Italian lottery")
             PrintUtils.print_line("Ticket {0}".format(ind+1),1)
-            PrintUtils.print_line(line[0]) #city
-            PrintUtils.print_line(line[1]) #bet
+            PrintUtils.print_line(line[0],1) #city
+            PrintUtils.print_line(line[1],1) #bet
+            PrintUtils.print_line(line[2],1) #money
             PrintUtils.print_line("--- --- --- --- --- --- ---",1)
-            PrintUtils.print_line(line[2],1)#numbers
+            PrintUtils.print_line(line[3],1)#numbers
             PrintUtils.print_footer_line("Good luck!")
 
             print("\n\n")
@@ -122,7 +144,7 @@ class LottoManager():
         extraction_str = str(extraction)
         lines = extraction_str.splitlines()
         for line in lines:
-            PrintUtils.print_line(line)
+            PrintUtils.print_line(line,1)
         PrintUtils.print_horizontal_line_separator()
         print()
     
@@ -130,7 +152,7 @@ class LottoManager():
     #check if many tickets are winning
     def check_winning(extraction, tickets_list):
         for ind, ticket in enumerate(tickets_list,1):
-            matching_number = extraction.check_matching_number(ticket.city.get_city_index(), ticket.get_numbers())
+            matching_number = extraction.check_matching_number(ticket.get_city().get_city_index(), ticket.get_numbers())
             if matching_number >= Ticket.get_minimum_number_amount(ticket.get_bets_type()):
                 PrintUtils.print_table_row("Ticket {0} is WINNING :)".format(ind),1)
             else:
