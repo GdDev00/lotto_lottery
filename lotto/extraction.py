@@ -58,7 +58,7 @@ class Extraction:
                     else:
                         temp_num = randrange(1,91)
             extraction_dict[key] = temp_extracted_number
-        
+
         return extraction_dict
 
     #return the generated lotto dictionary
@@ -159,15 +159,19 @@ class Extraction:
         #get the winning bets type
         #for example if you play quaterna and cinquina but you take only quaterna
         #this variable is = 3 (in the BetType class, 3 is the index of quaterna)
-        win_bets_type = bets_type_index[0:numbers_matching-1] #-1 because index starts from 0!
+        if numbers_matching == 1:
+            win_bets_type = bets_type_index[0:1] 
+        else:
+            win_bets_type = bets_type_index[0:numbers_matching-1] #-1 because index starts from 0!
+        
 
         #add all combination to combination_lst
         for bet in win_bets_type:
             combination_lst.append(Extraction.winning_combination_table[numbers_matching][bet])
         
         #calculate money win for each combination for a played of 1€
-        for ind, moltiplicator in enumerate(combination_lst):
-            gross_win += moltiplicator * Extraction.gross_winning_money_table[numbers_amount][bets_type_index[ind]]
+        for ind, multiplier in enumerate(combination_lst):
+            gross_win += multiplier * Extraction.gross_winning_money_table[numbers_amount][bets_type_index[ind]]
 
         #moltiplicate the win for the money played 
         gross_win = gross_win * money_played

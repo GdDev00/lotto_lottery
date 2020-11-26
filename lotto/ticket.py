@@ -75,7 +75,7 @@ class Ticket():
                     break
 
             number_list.append(number)
-        
+
         return sorted(number_list)
 
     @staticmethod
