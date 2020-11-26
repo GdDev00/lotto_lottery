@@ -17,6 +17,8 @@ class Ticket():
         #check money validity
         if Ticket.is_money_allowed(money):
             self._money = money
+        else:
+            raise ValueError("Money are incorrect!")
     
     def get_city(self):
         return self._city

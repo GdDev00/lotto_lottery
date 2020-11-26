@@ -13,13 +13,13 @@ class LottoManager():
         ticket_list = []
         
         for i in range(n_ticket):
-            PrintUtils.print_table_row("Ticket {0}".format(i+1))
-
+            PrintUtils.print_table_row("Ticket {0}".format(i+1),1)
+            print()
             #------------------#
             #SELECT TYPE OF BET
             bet_type_list = []
 
-            PrintUtils.print_line("Please, choose the type of bet:")
+            PrintUtils.print_table_row("- Please, choose the type of bet:")
             #print choose options
             for key, value in enumerate(BetType.get_bets_type(),1):
                 PrintUtils.print_line("{0}: {1}".format(key,value))
@@ -31,7 +31,7 @@ class LottoManager():
                     if BetType.is_bet_type_allowed(selected_bet_type):
                         bet_type_list.append(BetType(selected_bet_type))
                         break
-                
+                print()
                 PrintUtils.print_line("The value must be a valid integer number from the range!")
                 selected_bet_type = input("- ")
 
@@ -40,7 +40,7 @@ class LottoManager():
             for bet in bet_type_list:
                 print_str+= bet.get_bet_type_name() + " "
 
-            PrintUtils.print_table_row("Selected: {}".format(print_str))
+            PrintUtils.print_table_row("- Selected: {}".format(print_str))
             print()
 
 
@@ -48,7 +48,7 @@ class LottoManager():
             #SELECT CITY
             city = None
 
-            PrintUtils.print_line("Please, choose the city:")
+            PrintUtils.print_table_row("Please, choose the city:")
             #print choose option
             for key,value in enumerate(City.get_cities(),1):
                 PrintUtils.print_line("{:2d}: {}".format(key,value))
@@ -61,17 +61,17 @@ class LottoManager():
                     if City.is_city_index_allowed(selected_city):
                         city = City(selected_city)
                         break
-
+                print()
                 PrintUtils.print_line("The value must be a valid integer number from the range!")
                 selected_city = input("- ")
 
-            PrintUtils.print_table_row("Selected: {}".format(city.get_city_name()))
+            PrintUtils.print_table_row("- Selected: {}".format(city.get_city_name()))
             print()
 
             #--------------#
             # SELECT NUMBER AMOUNT
-            PrintUtils.print_line("Please, how many numbers do you want to play?")
-            PrintUtils.print_line("You can play at least {0} and a max of 10 numbers".format(Ticket.get_minimum_number_amount(bet_type_list)))
+            PrintUtils.print_table_row("Please, how many numbers do you want to play? \
+                You can play at least {0} and a max of 10 numbers".format(Ticket.get_minimum_number_amount(bet_type_list)))
             numbers_amount = input("- ")
 
             while True:
@@ -79,7 +79,7 @@ class LottoManager():
                     numbers_amount = int(numbers_amount)
                     if Ticket.is_number_amount_allowed(bet_type_list,numbers_amount):
                         break
-
+                print()                
                 PrintUtils.print_line("You can play at least {0} and a max of 10 numbers!".format(Ticket.get_minimum_number_amount(bet_type_list)))
                 numbers_amount = input("- ")
             print()
@@ -87,9 +87,9 @@ class LottoManager():
 
             #--------------#
             # SELECT MONEY TO PLAY
-            PrintUtils.print_line("Please, how much do you want to play?")
-            PrintUtils.print_line("The minimum bet on a Lotto ticket is € 1.00")
-            PrintUtils.print_line("The maximum is € 200.00 with denominations of € 0.50")
+            PrintUtils.print_table_row("Please, how much do you want to play?\
+                                        The minimum bet on a Lotto ticket is € 1.00\
+                                        The maximum is € 200.00 with denominations of € 0.50")
             money = input("- ")
 
             while True:
@@ -99,7 +99,7 @@ class LottoManager():
                         break
                 except:
                     pass
-
+                print()
                 PrintUtils.print_line("Please, write a valid numeric value!")  
                 money = input("- ")
 
@@ -150,11 +150,31 @@ class LottoManager():
     
     @staticmethod
     #check if many tickets are winning
-    def check_winning(extraction, tickets_list):
+    def check_ticket_is_winning(extraction, tickets_list):
         for ind, ticket in enumerate(tickets_list,1):
-            matching_number = extraction.check_matching_number(ticket.get_city().get_city_index(), ticket.get_numbers())
-            if matching_number >= Ticket.get_minimum_number_amount(ticket.get_bets_type()):
-                PrintUtils.print_table_row("Ticket {0} is WINNING :)".format(ind),1)
+            gross_win = 0.0
+            net_win = 0.0
+            gross_win, net_win = extraction.check_winning(ticket)
+
+            PrintUtils.print_horizontal_line_separator()
+
+            if gross_win > 0.0:
+                PrintUtils.print_line("Ticket {0} is WINNING :)".format(ind),1)
+
+                #formatting money
+                formatted_float = "{:,.2f}".format(gross_win)
+                main_currency, fractional_currency = formatted_float.split(".")[0], formatted_float.split(".")[1]
+                new_main_currency = main_currency.replace(",", ".")
+                currency = new_main_currency + "," + fractional_currency
+
+                PrintUtils.print_line("Win: € {}".format(currency),1)
+
+                if gross_win > 500.0:
+                    PrintUtils.print_line("You have win more than 500€, so it is applicated a withholding tax of 8%")
+                    PrintUtils.print_line("Your net win is: € {0}".format(net_win),1)
+
             else:
-                PrintUtils.print_table_row("Ticket {0} is LOSER :(".format(ind),1)
+                PrintUtils.print_line("Ticket {0} is LOSER :(".format(ind),1)
+
+            PrintUtils.print_horizontal_line_separator()
             

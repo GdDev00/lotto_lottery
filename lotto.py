@@ -1,7 +1,7 @@
 import argparse
 from lotto.lotto_manager import LottoManager
 from lotto.print_utils import PrintUtils
-
+from lotto.extraction import Extraction
 MAX_BILLS = 5
 
 
@@ -18,7 +18,7 @@ def main():
 
         #no paramater from cli
         if(n_of_tickets == None):
-            PrintUtils.print_line("How many tickets do you want generate?")
+            PrintUtils.print_table_row("How many tickets do you want generate?",1)
             PrintUtils.print_line("Please, write a number between 1-{}; 0 to exit:".format(MAX_BILLS)) 
 
             n_of_tickets = input("- ")
@@ -49,7 +49,7 @@ def main():
         lotto_manager.print_extractions(extraction)
 
         #check extractions
-        lotto_manager.check_winning(extraction, tickets)
+        lotto_manager.check_ticket_is_winning(extraction, tickets)
 
         n_of_tickets = None
         print("\n \n \n")
