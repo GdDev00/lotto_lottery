@@ -3,7 +3,14 @@ The purpose of the entire project is to create the Italian Lotto game in Python 
 For more info check about the game check: https://www.sisal.it/lotto/come-si-gioca .\
 For the project purpose, **it completely ignore "ruota nazionale" and the "estratto determinato" play type.**
 
-The project is composed by 4 level. In this branch, it is developed the second level.
+The project is composed by 4 level. In this branch, it is developed the third level.
+
+* ## Level 3 - Lotto calculate prizes
+Level three of this project requires to calculate prizes if some of the tickets that are generated result winners
+There is an update of Extraction class, now it contains also the logic of winning calculation
+
+
+
 * ## Level 2: Lotto Fake Extraction
 Level two of this project requires to add a lotto number extraction phase and to check if some of the tickets you generated result winners.
 **Example**\
