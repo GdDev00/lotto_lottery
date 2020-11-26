@@ -31,54 +31,66 @@ class Extraction:
     def get_extraction(self):
         return self.extraction
 
-    #check if some numbers are in the corrispective city index
-    #@return -> the number of matching numbers
-    #@return -1 if the parameter are not valid!
-    def check_matching_number(self, city_index, numbers_to_check):
-        #check parameter
-        if City.is_city_index_allowed(city_index) == False or \
-            isinstance(numbers_to_check,list) == False:
-            return -1
+    #check if a ticket is winning
+    #
+    #@parameter ticket -> the ticket to check
+    #
+    #@return -> the gross_win,net_win
+    #@       -> if the tiken is loser, it returns 0,0
+    def check_winning(self, ticket):
+        gross_win,net_win = 0,0
+        is_all_city = False
+        matching_numbers = 0
 
+        #-- CHECK IF TIKET IS ON ALL CITY --#
+        
+        #get "Tutte" index
+        tutte_index = City.get_city_index_by_name("Tutte")
+
+        #check if played city are all
+        if ticket.get_city().get_city_index() == tutte_index:
+            is_all_city = True
+            #chek the matching numbers in every city
+            for i in range(len(City.get_cities())-1):
+                temp_matching_numbers = self._check_matching_numbers(i, ticket.get_numbers(),\
+                                    ticket.get_minimum_number_amount(ticket.get_bets_type()))
+                # ticket is winning
+                if temp_matching_numbers > 0:
+                    matching_numbers += temp_matching_numbers
+
+        #ticket is played on only one city
+        else:
+            #check the matching numbers in one city
+            matching_numbers = self._check_matching_numbers(ticket.get_city().get_city_index(),\
+                            ticket.get_numbers(), ticket.get_minimum_number_amount(ticket.get_bets_type()))
+
+        # ticket is winning
+        if matching_numbers > 0:           
+            gross_win, net_win = Extraction._calculate_win((len(ticket.get_numbers())), \
+                                    matching_numbers, ticket.get_money(), ticket.get_bets_type(),is_all_city)
+                        
+        #return both gross and net win
+        #these variable are initilized to 0 so if the ticket is loser it returns 0,0
+        return gross_win, net_win
+
+
+    #check matching number in one route
+    #
+    #@parameter city_index          -> the city index to check (refer to City class)
+    #@parameter tck_numbers         -> a list of numbers to check if are matching
+    #@parameter  min_numbers_needed -> minimum numbers needed to win
+    #
+    #@return -> the matching numbers
+    #@       -> 0, it the ticket haven't any matching numbers
+    def _check_matching_numbers(self, city_index, tck_numbers, min_numbers_needed):
         matching_number_count = 0
 
-        # check if the city is "Tutte"
-        tutte_index = City.get_city_index_by_name("Tutte")
-        if city_index == tutte_index:
-            for tck_val in numbers_to_check:
-                for key, extract_value in self.extraction.items():
-                    if tck_val in extract_value:
-                        matching_number_count+=1
+        for number in tck_numbers:
+            if number in self.extraction[city_index]:
+                matching_number_count += 1
 
-        #city isn't "Tutte"
-        else:
-            for tck_val in numbers_to_check:
-                if tck_val in self.extraction[city_index]:
-                    matching_number_count+=1
-
-        return matching_number_count
-    
-    def check_ticket_winning(ticket):
-        #check parameter
-        if City.is_city_index_allowed(ticket.city.get_city_index()) == False or \
-            isinstance(ticket.get_numbers(),list) == False:
-            return -1
-
-        matching_number_count = 0
-
-        # check if the city is "Tutte"
-        tutte_index = City.get_city_index_by_name("Tutte")
-        if ticket.city.get_city_index() == tutte_index:
-            for tck_val in ticket.get_numbers():
-                for key, extract_value in self.extraction.items():
-                    if tck_val in extract_value:
-                        matching_number_count+=1
-
-        #city isn't "Tutte"
-        else:
-            for tck_val in ticket.get_numbers():
-                if tck_val in self.extraction[city_index]:
-                    matching_number_count+=1
+        if matching_number_count < min_numbers_needed:
+            matching_number_count = 0
 
         return matching_number_count
 
