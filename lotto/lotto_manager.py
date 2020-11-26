@@ -130,8 +130,8 @@ class LottoManager():
     #check if many tickets are winning
     def check_winning(extraction, tickets_list):
         for ind, ticket in enumerate(tickets_list,1):
-            matching_number = extraction.check_matching_number(ticket.city.get_city_index(), ticket.get_numbers())
-            if matching_number >= Ticket.get_minimum_number_amount(ticket.get_bets_type()):
+            is_winning = extraction.check_winning(ticket)
+            if is_winning == True:
                 PrintUtils.print_table_row("Ticket {0} is WINNING :)".format(ind),1)
             else:
                 PrintUtils.print_table_row("Ticket {0} is LOSER :(".format(ind),1)

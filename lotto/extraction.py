@@ -38,7 +38,6 @@ class Extraction:
     #@return -> the gross_win,net_win
     #@       -> if the tiken is loser, it returns 0,0
     def check_winning(self, ticket):
-        gross_win,net_win = 0,0
         is_all_city = False
         matching_numbers = 0
 
@@ -48,7 +47,7 @@ class Extraction:
         tutte_index = City.get_city_index_by_name("Tutte")
 
         #check if played city are all
-        if ticket.get_city().get_city_index() == tutte_index:
+        if ticket.city.get_city_index() == tutte_index:
             is_all_city = True
             #chek the matching numbers in every city
             for i in range(len(City.get_cities())-1):
@@ -61,17 +60,14 @@ class Extraction:
         #ticket is played on only one city
         else:
             #check the matching numbers in one city
-            matching_numbers = self._check_matching_numbers(ticket.get_city().get_city_index(),\
+            matching_numbers = self._check_matching_numbers(ticket.city.get_city_index(),\
                             ticket.get_numbers(), ticket.get_minimum_number_amount(ticket.get_bets_type()))
 
         # ticket is winning
-        if matching_numbers > 0:           
-            gross_win, net_win = Extraction._calculate_win((len(ticket.get_numbers())), \
-                                    matching_numbers, ticket.get_money(), ticket.get_bets_type(),is_all_city)
-                        
-        #return both gross and net win
-        #these variable are initilized to 0 so if the ticket is loser it returns 0,0
-        return gross_win, net_win
+        if matching_numbers > 0:
+            return True
+        else:
+            return False        
 
 
     #check matching number in one route
