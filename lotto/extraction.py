@@ -17,7 +17,7 @@ class Extraction:
                                  7: [7, 21, 35, 35, 21],
                                  8: [8, 28, 56, 70, 56],
                                  9: [9, 36, 84, 126, 126],
-                                 10: [10, 45, 120, 210, 252]}
+                                 10:[10, 45, 120, 210, 252]}
     
     
     #a winning table for 1€
@@ -128,7 +128,6 @@ class Extraction:
             matching_number_count = 0
 
         return matching_number_count
-
 
 
     #calculate the win money of a ticket
